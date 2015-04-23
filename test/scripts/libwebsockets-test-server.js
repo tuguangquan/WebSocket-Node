@@ -22,7 +22,8 @@ var http = require('http');
 var fs = require('fs');
 
 var args = { /* defaults */
-    secure: false
+    secure: false,
+    'port': '8080'
 };
 
 /* Parse command line options */
@@ -41,15 +42,12 @@ if (!args.port) {
     console.log('libwebsockets-test-server protocols.');
     console.log('Usage: ./libwebsockets-test-server.js --port=8080 [--secure]');
     console.log('');
-    return;
 }
-
 if (args.secure) {
     console.log('WebSocket-Node: Test Server implementing Andy Green\'s');
     console.log('libwebsockets-test-server protocols.');
     console.log('ERROR: TLS is not yet supported.');
     console.log('');
-    return;
 }
 
 var server = http.createServer(function(request, response) {
