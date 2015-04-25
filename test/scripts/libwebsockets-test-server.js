@@ -22,7 +22,7 @@ var http = require('http');
 var fs = require('fs');
 
 var args = { /* defaults */
-    secure: false,
+    secure: false,              //ws
     'port': '8080'
 };
 
@@ -37,13 +37,13 @@ process.argv.forEach(function(value) {
 
 args.protocol = args.secure ? 'wss:' : 'ws:';
 
-if (!args.port) {
+if (!args.port) {                  //没有设置端口号
     console.log('WebSocket-Node: Test Server implementing Andy Green\'s');
     console.log('libwebsockets-test-server protocols.');
     console.log('Usage: ./libwebsockets-test-server.js --port=8080 [--secure]');
     console.log('');
 }
-if (args.secure) {
+if (args.secure) {                //如果是安全协议wss
     console.log('WebSocket-Node: Test Server implementing Andy Green\'s');
     console.log('libwebsockets-test-server protocols.');
     console.log('ERROR: TLS is not yet supported.');
@@ -119,7 +119,7 @@ router.mount('*', 'lws-mirror-protocol', function(request) {
     }
     
     mirrorConnections.push(connection);
-    
+
     connection.on('message', function(message) {
         // We only care about text messages
         if (message.type === 'utf8') {
